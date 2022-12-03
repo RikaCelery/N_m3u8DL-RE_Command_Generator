@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<meta lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Command Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<script>
+    function changeColor() {
+        if (document.getElementById('DarkMode').checked) {
+            console.log('aaa')
+            document.documentElement.style.setProperty('--backgrond-color', 'var(--backgrond-color-light)')
+            document.documentElement.style.setProperty('--accent-color', 'var(--accent-color-light)')
+            document.documentElement.style.setProperty('--button-color-hover', 'var(--button-color-hover-light)')
+            document.documentElement.style.setProperty('--button-color-nohover', 'var(--button-color-nohover-light)')
+            document.documentElement.style.setProperty('--button-color', 'var(--button-color-light)')
+            document.documentElement.style.setProperty('--main-text-color', 'var(--main-text-color-light)')
+            document.documentElement.style.setProperty('--description-text-color',
+                'var(--description-text-color-light)')
+            document.documentElement.style.setProperty('--background-color', 'var(--background-color-light)')
+            document.documentElement.style.setProperty('--border-color', 'var(--border-color-light)')
+            document.documentElement.style.setProperty('--input-color-hover', 'var(--input-color-hover-light)')
+        } else {
+            document.documentElement.style.setProperty('--backgrond-color', 'var(--backgrond-color-dark)')
+            document.documentElement.style.setProperty('--accent-color', 'var(--accent-color-dark)')
+            document.documentElement.style.setProperty('--button-color-hover', 'var(--button-color-hover-dark)')
+            document.documentElement.style.setProperty('--button-color-nohover', 'var(--button-color-nohover-dark)')
+            document.documentElement.style.setProperty('--button-color', 'var(--button-color-dark)')
+            document.documentElement.style.setProperty('--main-text-color', 'var(--main-text-color-dark)')
+            document.documentElement.style.setProperty('--description-text-color', 'var(--description-text-color-dark)')
+            document.documentElement.style.setProperty('--background-color', 'var(--background-color-dark)')
+            document.documentElement.style.setProperty('--border-color', 'var(--border-color-dark)')
+            document.documentElement.style.setProperty('--input-color-hover', 'var(--input-color-hover-dark)')
+        }
+
+
+        return
+    }
+</script>
+
+<body>
+    <section class="container">
+        <header>Generator</header>
+        <input style="width: 30px;height: 30px;" type="checkbox" name="DarkMode" id="DarkMode"
+            onclick="changeColor()"></input>
+        <div id="output"></div>
+        <form action="#" class="form" id="generator_body">
+
+            <div class="column">
+                <div class="input-box">
+                    <label for="input">Url</label>
+                    <input id="input" type="text" placeholder="链接或文件" required>
+                </div>
+                <div class="input-box">
+                    <label for="">save-name</label>
+                    <input id="save-name" type="text" placeholder="设置保存文件名">
+                </div>
+                <div class="input-box">
+                    <label for="">base-url</label>
+                    <input id="base-url" type="text" placeholder="设置BaseURL">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="">save-dir</label>
+                    <input id="save-dir" type="text" placeholder="设置输出目录">
+                </div>
+                <div class="input-box">
+                    <label for="">tmp-dir</label>
+                    <input id="tmp-dir" type="text" placeholder="设置临时文件存储目录">
+                </div>
+                <div class="input-box">
+                    <label for="">mux-import</label>
+                    <input id="mux-import" type="text" placeholder="混流时引入外部媒体文件">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="">thread-count</label>
+                    <input id="thread-count" type="text" placeholder="设置下载线程数 [default: 8]" defalut="8">
+                </div>
+                <div class="input-box">
+                    <label for="">download-retry-count</label>
+                    <input id="download-retry-count" type="text" placeholder="每个分片下载异常时的重试次数 [default: 3]" defalut="3">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="">ffmpeg-binary-path</label>
+                    <input id="ffmpeg-binary-path" type="text" placeholder="ffmpeg可执行程序全路径, 例如 C:\Tools\ffmpeg.exe">
+                </div>
+                <div class="input-box">
+                    <label for="">urlprocessor-args</label>
+                    <input id="urlprocessor-args" type="text" placeholder="此字符串将直接传递给URL Processor">
+                </div>
+            </div>
+            <div class="input-box">
+                <label for="">key-text-file</label>
+                <input id="key-text-file" type="text" placeholder="设置密钥文件,程序将从文件中按KID搜寻KEY以解密.(不建议使用特大文件)">
+            </div>
+            <div class="input-box">
+                <label for="">decryption-binary-path</label>
+                <input id="decryption-binary-path" type="text" placeholder=" MP4解密所用工具的全路径, 例如 C:\Tools\mp4decrypt.exe">
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label for="">mux-after-done</label>
+                    <input id="mux-after-done" type="text" placeholder="所有工作完成时尝试混流分离的音视频">
+                </div>
+                <div class="input-box">
+                    <label for="">custom-hls-key</label>
+                    <input id="custom-hls-key" type="text" placeholder="指定HLS解密KEY. 可以是文件, HEX或Base64">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="">custom-hls-iv</label>
+                    <input id="custom-hls-iv" type="text" placeholder="指定HLS解密IV. 可以是文件, HEX或Base64">
+                </div>
+                <div class="input-box">
+                    <label for="">custom-proxy</label>
+                    <input id="custom-proxy" type="text" placeholder="设置请求代理, 如 http://127.0.0.1:8888">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="">live-record-limit</label>
+                    <input id="live-record-limit" type="text" placeholder="录制直播时的录制时长限制,格式: HH:mm:ss">
+                </div>
+                <div class="input-box">
+                    <label for="">live-wait-time</label>
+                    <input id="live-wait-time" type="text" placeholder="手动设置直播列表刷新间隔, 单位为秒">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="">select-video</label>
+                    <input id="select-video" type="text" placeholder="通过正则表达式选择符合要求的视频流">
+                </div>
+                <div class="input-box">
+                    <label for="">select-audio</label>
+                    <input id="select-audio" type="text" placeholder="通过正则表达式选择符合要求的音频流">
+                </div>
+                <div class="input-box">
+                    <label for="">select-subtitle</label>
+                    <input id="select-subtitle" type="text" placeholder="通过正则表达式选择符合要求的字幕流">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label for="log-level">log-level</label>
+                    <div class="description">设置日志级别</div>
+                    <div class="select-box">
+                        <select id="log-level">
+                            <option>INFO</option>
+                            <option>DEBUG</option>
+                            <option>WARN</option>
+                            <option>ERROR</option>
+                            <option>OFF</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for="custom-hls-method">custom-hls-method</label>
+                    <div class="description">指定HLS加密方式</div>
+                    <div class="select-box">
+                        <select id="custom-hls-method">
+                            <option value="">AUTO</option>
+                            <option>INFO</option>
+                            <option>AES_128</option>
+                            <option>AES_128_ECB</option>
+                            <option>CENC</option>
+                            <option>CHACHA20</option>
+                            <option>NONE</option>
+                            <option>SAMPLE_AES</option>
+                            <option>SAMPLE_AES_CTR</option>
+                            <option>UNKNOWN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for="sub-format">sub-format</label>
+                    <div class="description">字幕输出类型</div>
+                    <div class="select-box">
+                        <select id="sub-format">
+                            <option>SRT</option>
+                            <option>VTT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for="ui-language">ui-language</label>
+                    <div class="description">设置UI语言</div>
+                    <div class="select-box">
+                        <select id="ui-language">
+                            <option value="">none</option>
+                            <option>zh-CN</option>
+                            <option>zh-TW</option>
+                            <option>en-US</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="check-box">
+                <!-- <h3>Gender</h3> -->
+                <div class="check-option ">
+                    <div class="check ">
+                        <div>
+                            <input type="checkbox" name="auto-select" id="auto-select" />
+                            <label for="auto-select">auto-select</label>
+                            <div class="description">自动选择所有类型的最佳轨道</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="skip-merge" id="skip-merge" />
+                            <label for="skip-merge">skip-merge</label>
+                            <div class="description">跳过合并分片</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="skip-download" id="skip-download" />
+                            <label for="skip-download">skip-download</label>
+                            <div class="description">跳过下载</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="check-segments-count" id="check-segments-count" checked />
+                            <label for="check-segments-count">check-segments-count</label>
+                            <div class="description">检测实际下载的分片数量和预期数量是否匹配 </div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="binary-merge" id="binary-merge" />
+                            <label for="binary-merge">binary-merge</label>
+                            <div class="description">二进制合并</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="del-after-done" id="del-after-done" checked />
+                            <label for="del-after-done">del-after-done</label>
+                            <div class="description">完成后删除临时文件 </div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="no-date-info" id="no-date-info" />
+                            <label for="no-date-info">no-date-info</label>
+                            <div class="description">混流时不写入日期信息</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="write-meta-json" id="write-meta-json" />
+                            <label for="write-meta-json">write-meta-json</label>
+                            <div class="description">解析后的信息是否输出json文件</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="append-url-params" id="append-url-params" />
+                            <label for="append-url-params">append-url-params</label>
+                            <div class="description">将输入Url的Params添加至分片, 对某些网站很有用, 例如 kakao.com</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="concurrent-download" id="concurrent-download" />
+                            <label for="concurrent-download">concurrent-download</label>
+                            <div class="description">并发下载已选择的音频、视频和字幕</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="sub-only" id="sub-only" />
+                            <label for="sub-only">sub-only</label>
+                            <div class="description">只选取字幕轨道</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="auto-subtitle-fix" id="auto-subtitle-fix" checked />
+                            <label for="auto-subtitle-fix">auto-subtitle-fix</label>
+                            <div class="description">自动修正字幕 </div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="use-shaka-packager" id="use-shaka-packager" />
+                            <label for="use-shaka-packager">use-shaka-packager</label>
+                            <div class="description">解密时使用shaka-packager替代mp4decrypt</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="mp4-real-time-decryption" id="mp4-real-time-decryption" />
+                            <label for="mp4-real-time-decryption">mp4-real-time-decryption</label>
+                            <div class="description">实时解密MP4分片</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="use-system-proxy" id="use-system-proxy" checked />
+                            <label for="use-system-proxy">use-system-proxy</label>
+                            <div class="description">使用系统默认代理 </div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="live-perform-as-vod" id="live-perform-as-vod" />
+                            <label for="live-perform-as-vod">live-perform-as-vod</label>
+                            <div class="description">以点播方式下载直播流</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="live-real-time-merge" id="live-real-time-merge" />
+                            <label for="live-real-time-merge">live-real-time-merge</label>
+                            <div class="description">录制直播时实时合并</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="live-keep-segments" id="live-keep-segments" checked />
+                            <label for="live-keep-segments">live-keep-segments</label>
+                            <div class="description">录制直播并开启实时合并时依然保留分片 </div>
+                        </div>
+                        <!-- <div>
+                            <input type="radio" name="" id="" checked />
+                            <label for=""></label>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="button" value="Generate" onclick="generate('generator_body');return true" />
+        </form>
+    </section>
+</body>
+<script>
+    function generate(params) {
+        let form = document.getElementById(params)
+        console.log(form)
+        let list = form.querySelectorAll('input')
+        let finalArgs = []
+        for (let index = 0; index < list.length; index++) {
+            const element = list[index];
+            switch (element.type) {
+                case 'text':
+                    if (element.value.length != 0) {
+                        if (element.id!='input') {
+                            finalArgs.push('--' + element.id + ' "' + element.value + '"')
+                            
+                        } else {
+                            finalArgs.push('"' + element.value + '"')
+                            
+                        }
+                    }
+                    break;
+                case 'checkbox':
+                    if (element.checked) {
+                        finalArgs.push('--' + element.id)
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            console.log(element.type + ' ' + element.id + ' value:[' + element.value + '] ' + element.placeholder)
+        }
+        let list2 = form.querySelectorAll('select')
+        for (let index = 0; index < list2.length; index++) {
+            const element = list2[index];
+            let opt = element.options[element.selectedIndex]
+            if (opt.value === '' || opt.hidden) {
+                console.log(element.type + ' ' + element.id + ' ' + 'hidden')
+            } else {
+                if (element.value.length != 0) {
+                    finalArgs.push('--' + element.id + ' "' + opt.value + '"')
+                }
+                console.log(element.type + ' ' + element.id + ' ' + opt.value)
+            }
+        }
+        document.getElementById('output').textContent='.\\N_m3u8DL-RE.exe '+finalArgs.join(" ")
+        console.log(finalArgs.join(" "))
+    }
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+:root{
+    --backgrond-color-light:rgb(130, 106, 251);
+    --backgrond-color-dark:rgb(16, 13, 29);
+    --backgrond-color: var(--backgrond-color-dark);
+
+    --accent-color-light:rgb(130, 106, 251);
+    --accent-color-dark:rgb(130, 106, 251);;
+    --accent-color:var(--accent-color-dark);
+    
+    --backgrond-color-hover-light:rgb(81, 57, 202);
+    --backgrond-color-hover-dark:rgb(80, 64, 168);
+    --backgrond-color-hover: var(--backgrond-color-hover-dark);
+    
+    --input-color-hover-light:rgba(130, 106, 251, 0.501);
+    --input-color-hover-dark:rgba(81, 57, 202, 0.688);
+    --input-color-hover: var(--input-color-hover-dark);
+
+    --button-color-nohover-light:rgb(130, 106, 251);
+    --button-color-nohover-dark:rgb(52, 52, 81);
+    --button-color-nohover: var(--button-color-nohover-dark);
+
+    --button-color-light:#fff;
+    --button-color-dark:#fff;
+    --button-color:var(--button-color-light);
+    
+    --main-text-color-light: rgb(0, 0, 0);
+    --main-text-color-dark: rgb(205, 205, 205);
+    --main-text-color: var(--main-text-color-dark);
+    
+    --description-text-color-light: rgb(120, 120, 120);
+    --description-text-color-dark: rgb(120, 120, 120);
+    --description-text-color: var(--description-text-color-dark);
+
+    --background-color-light:#fff;
+    --background-color-dark:rgb(31, 31, 31);
+    --background-color:var(--background-color-dark);
+
+    --border-color-light:#ddd;
+    --border-color-dark:rgb(61, 61, 61);
+    --border-color:var(--border-color-dark);
+
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease-in-out;
+
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--backgrond-color);
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 25px;
+    background: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container header {
+    font-size: 1.5rem;
+    color: var(--main-text-color);
+    font-weight: 500;
+    text-align: center;
+}
+#output{
+    font-size: 1rem;
+    color: var(--main-text-color);
+    font-weight: 200;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+.form :where(input,select){
+    background: transparent;
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-box label {
+    color: var(--main-text-color);
+}
+
+.form :where(.input-box input, .select-box) {
+    position: relative;
+    width: 100%;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    padding: 0 15px;
+}
+
+.form .column {
+    display: flex;
+    column-gap: 15px;
+}
+
+.form .column input {
+    position: relative;
+    width: 100%;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    padding: 0 15px;
+}
+
+.form label {
+    color: var(--main-text-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.form .check-box {
+    margin-top: 20px;
+}
+
+.check-box h3 {
+    font-size: 1rem;
+    color: var(--main-text-color);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.description {
+    font-size: 1rem;
+    color: var(--description-text-color);
+    width: 100%;
+    font-weight: 400;
+    justify-content: flex-end;
+    font-style: italic;
+}
+
+.input-box .description {
+    width: 100%;
+    padding-left: 10px;
+}
+
+
+.form :where(.check-option, .check, .check div) {
+    column-gap: 5px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form .check div label {
+    width: max-content;
+    flex-shrink: 0;
+}
+
+.form .check>div {
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.form .check input {
+    margin-top: 1px;
+}
+
+.form :where(.check input, .check label) {
+    accent-color: var(--accent-color);
+    cursor: pointer;
+}
+
+.select-box select {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    color:  var(--main-text-color);
+    font-size: 1rem;
+}
+
+.form .button {
+    height: 55px;
+    width: 100%;
+    color: var(--button-color);
+    background-color: var(--button-color-nohover);
+    font-weight: 600;
+    border: none;
+    margin-top: 30px;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.form .button:hover {
+    background-color: var(--backgrond-color-hover);
+}
+
+.form .multi-line>* {
+    margin-bottom: 15px;
+}
+
+.row {
+    flex-wrap: wrap;
+}
+
+#DarkMode{
+    position: absolute;
+    top: 60px;
+    transform: scale(2);
+    outline: none;
+    border: none;
+}
+
+.form input {
+    color: var(--main-text-color);
+}
+.form input:focus {
+    background-color: var(--input-color-hover);
+}
+.form input:invalid:not(input:focus) {
+    outline: 2px solid red;
+}
+@media screen and (max-width: 1000px) {
+
+    .form .check>div {
+        flex-wrap: wrap;
+    }
+
+    .check-box .description {
+        font-size: 1rem;
+        font-weight: 400;
+        width: 100%;
+        justify-content: start;
+        padding-left: 10px;
+        margin-bottom: 8px;
+    }
+
+    .column{
+        flex-wrap: wrap;
+    }
+}
+</style>
