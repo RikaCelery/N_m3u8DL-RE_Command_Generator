@@ -6,4 +6,4 @@
 
 支持大部分参数
 
-![main](./mian.png)
+![main](https://github.com/RikaCelery/N_m3u8DL-RE_Command_Generator/blob/main/main.png)
