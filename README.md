@@ -1,6 +1,6 @@
 # N_m3u8DL-RE_Command_Generator
 
->一个N_m3u8DL-RE命令行生成器
+>一个[N_m3u8DL-RE](https://github.com/nilaoda/N_m3u8DL-RE)命令行生成器
 
 ---
 
