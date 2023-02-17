@@ -45,7 +45,7 @@
         <input style="width: 30px;height: 30px;" type="checkbox" name="DarkMode" id="DarkMode"
             onclick="changeColor()"></input>
         <div id="output"></div>
-        <form action="#" class="form" id="generator_body">
+        <form action="#" class="form" id="generator_body" taget="ifram">
 
             <div class="column">
                 <div class="input-box">
@@ -309,6 +309,7 @@
             </div>
             <input type="submit" class="button" value="Generate" onclick="generate('generator_body');return true" />
         </form>
+    <ifram id="ifram" name="ifram" diasplay="none"></ifram>
     </section>
 </body>
 <script>
