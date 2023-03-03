@@ -225,7 +225,8 @@
                             <div class="description">跳过下载</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="check-segments-count" id="check-segments-count" checked />
+                            <input type="checkbox" name="check-segments-count" id="check-segments-count" checked
+                                default="true" />
                             <label for="check-segments-count">check-segments-count</label>
                             <div class="description">检测实际下载的分片数量和预期数量是否匹配 </div>
                         </div>
@@ -235,7 +236,7 @@
                             <div class="description">二进制合并</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="del-after-done" id="del-after-done" checked />
+                            <input type="checkbox" name="del-after-done" id="del-after-done" checked default="true" />
                             <label for="del-after-done">del-after-done</label>
                             <div class="description">完成后删除临时文件 </div>
                         </div>
@@ -265,7 +266,8 @@
                             <div class="description">只选取字幕轨道</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="auto-subtitle-fix" id="auto-subtitle-fix" checked />
+                            <input type="checkbox" name="auto-subtitle-fix" id="auto-subtitle-fix" checked
+                                default="true" />
                             <label for="auto-subtitle-fix">auto-subtitle-fix</label>
                             <div class="description">自动修正字幕 </div>
                         </div>
@@ -280,7 +282,8 @@
                             <div class="description">实时解密MP4分片</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="use-system-proxy" id="use-system-proxy" checked />
+                            <input type="checkbox" name="use-system-proxy" id="use-system-proxy" checked
+                                default="true" />
                             <label for="use-system-proxy">use-system-proxy</label>
                             <div class="description">使用系统默认代理 </div>
                         </div>
@@ -295,7 +298,8 @@
                             <div class="description">录制直播时实时合并</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="live-keep-segments" id="live-keep-segments" checked />
+                            <input type="checkbox" name="live-keep-segments" id="live-keep-segments" checked
+                                default="true" />
                             <label for="live-keep-segments">live-keep-segments</label>
                             <div class="description">录制直播并开启实时合并时依然保留分片 </div>
                         </div>
@@ -322,19 +326,33 @@
             switch (element.type) {
                 case 'text':
                     if (element.value.length != 0) {
-                        if (element.id!='input') {
+                        if (element.id != 'input') {
                             finalArgs.push('--' + element.id + ' "' + element.value + '"')
-                            
+
                         } else {
                             finalArgs.push('"' + element.value + '"')
-                            
+
                         }
                     }
                     break;
                 case 'checkbox':
-                    if (element.checked) {
+
+                    if (element.checked == Boolean(element.getAttribute('default'))) {
+                        // finalArgs.push('**' + element.id)
+                        // finalArgs.push(String(element.checked))
+                    } else {
                         finalArgs.push('--' + element.id)
+                        finalArgs.push(String(element.checked))
                     }
+                    // if (element.checked) {
+                    //     finalArgs.push('--' + element.id)
+                    //     finalArgs.push('true')
+                    // } else {
+                    //     if (element.checked != Boolean(element.getAttribute('default'))) {
+                    //         finalArgs.push('--' + element.id)
+                    //         finalArgs.push(String(element.checked))
+                    //     }
+                    // }
                     break;
 
                 default:
@@ -355,262 +373,273 @@
                 console.log(element.type + ' ' + element.id + ' ' + opt.value)
             }
         }
-        document.getElementById('output').textContent='.\\N_m3u8DL-RE.exe '+finalArgs.join(" ")
+        document.getElementById('output').textContent = '.\\N_m3u8DL-RE.exe ' + finalArgs.join(" ")
         console.log(finalArgs.join(" "))
     }
+
+    setInterval(() => generate('generator_body'), 100)
 </script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-:root{
-    --backgrond-color-light:rgb(130, 106, 251);
-    --backgrond-color-dark:rgb(16, 13, 29);
-    --backgrond-color: var(--backgrond-color-dark);
 
-    --accent-color-light:rgb(130, 106, 251);
-    --accent-color-dark:rgb(130, 106, 251);;
-    --accent-color:var(--accent-color-dark);
-    
-    --backgrond-color-hover-light:rgb(81, 57, 202);
-    --backgrond-color-hover-dark:rgb(80, 64, 168);
-    --backgrond-color-hover: var(--backgrond-color-hover-dark);
-    
-    --input-color-hover-light:rgba(130, 106, 251, 0.501);
-    --input-color-hover-dark:rgba(81, 57, 202, 0.688);
-    --input-color-hover: var(--input-color-hover-dark);
+    :root {
+        --backgrond-color-light: rgb(130, 106, 251);
+        --backgrond-color-dark: rgb(16, 13, 29);
+        --backgrond-color: var(--backgrond-color-dark);
 
-    --button-color-nohover-light:rgb(130, 106, 251);
-    --button-color-nohover-dark:rgb(52, 52, 81);
-    --button-color-nohover: var(--button-color-nohover-dark);
+        --accent-color-light: rgb(130, 106, 251);
+        --accent-color-dark: rgb(130, 106, 251);
+        ;
+        --accent-color: var(--accent-color-dark);
 
-    --button-color-light:#fff;
-    --button-color-dark:#fff;
-    --button-color:var(--button-color-light);
-    
-    --main-text-color-light: rgb(0, 0, 0);
-    --main-text-color-dark: rgb(205, 205, 205);
-    --main-text-color: var(--main-text-color-dark);
-    
-    --description-text-color-light: rgb(120, 120, 120);
-    --description-text-color-dark: rgb(120, 120, 120);
-    --description-text-color: var(--description-text-color-dark);
+        --backgrond-color-hover-light: rgb(81, 57, 202);
+        --backgrond-color-hover-dark: rgb(80, 64, 168);
+        --backgrond-color-hover: var(--backgrond-color-hover-dark);
 
-    --background-color-light:#fff;
-    --background-color-dark:rgb(31, 31, 31);
-    --background-color:var(--background-color-dark);
+        --input-color-hover-light: rgba(130, 106, 251, 0.501);
+        --input-color-hover-dark: rgba(81, 57, 202, 0.688);
+        --input-color-hover: var(--input-color-hover-dark);
 
-    --border-color-light:#ddd;
-    --border-color-dark:rgb(61, 61, 61);
-    --border-color:var(--border-color-dark);
+        --button-color-nohover-light: rgb(130, 106, 251);
+        --button-color-nohover-dark: rgb(52, 52, 81);
+        --button-color-nohover: var(--button-color-nohover-dark);
 
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.2s ease-in-out;
+        --button-color-light: #fff;
+        --button-color-dark: #fff;
+        --button-color: var(--button-color-light);
 
-}
-body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: var(--backgrond-color);
-}
+        --main-text-color-light: rgb(0, 0, 0);
+        --main-text-color-dark: rgb(205, 205, 205);
+        --main-text-color: var(--main-text-color-dark);
 
-.container {
-    width: 100%;
-    max-width: 1000px;
-    padding: 25px;
-    background: var(--background-color);
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
+        --description-text-color-light: rgb(120, 120, 120);
+        --description-text-color-dark: rgb(120, 120, 120);
+        --description-text-color: var(--description-text-color-dark);
 
-.container header {
-    font-size: 1.5rem;
-    color: var(--main-text-color);
-    font-weight: 500;
-    text-align: center;
-}
-#output{
-    font-size: 1rem;
-    color: var(--main-text-color);
-    font-weight: 200;
-    text-align: center;
-    border: 2px solid var(--border-color);
-    border-radius: 6px;
-    padding: 10px 0;
-    margin-top: 10px;
-}
-.form :where(input,select){
-    background: transparent;
-}
+        --background-color-light: #fff;
+        --background-color-dark: rgb(31, 31, 31);
+        --background-color: var(--background-color-dark);
 
-.form .input-box {
-    width: 100%;
-    margin-top: 20px;
-}
+        --border-color-light: #ddd;
+        --border-color-dark: rgb(61, 61, 61);
+        --border-color: var(--border-color-dark);
 
-.input-box label {
-    color: var(--main-text-color);
-}
-
-.form :where(.input-box input, .select-box) {
-    position: relative;
-    width: 100%;
-    outline: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    height: 50px;
-    border: 1px solid var(--border-color);
-    padding: 0 15px;
-}
-
-.form .column {
-    display: flex;
-    column-gap: 15px;
-}
-
-.form .column input {
-    position: relative;
-    width: 100%;
-    outline: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    height: 50px;
-    border: 1px solid var(--border-color);
-    padding: 0 15px;
-}
-
-.form label {
-    color: var(--main-text-color);
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-.form .check-box {
-    margin-top: 20px;
-}
-
-.check-box h3 {
-    font-size: 1rem;
-    color: var(--main-text-color);
-    font-weight: 400;
-    margin-bottom: 8px;
-}
-
-.description {
-    font-size: 1rem;
-    color: var(--description-text-color);
-    width: 100%;
-    font-weight: 400;
-    justify-content: flex-end;
-    font-style: italic;
-}
-
-.input-box .description {
-    width: 100%;
-    padding-left: 10px;
-}
-
-
-.form :where(.check-option, .check, .check div) {
-    column-gap: 5px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.form .check div label {
-    width: max-content;
-    flex-shrink: 0;
-}
-
-.form .check>div {
-    width: 100%;
-    flex-wrap: nowrap;
-}
-
-.form .check input {
-    margin-top: 1px;
-}
-
-.form :where(.check input, .check label) {
-    accent-color: var(--accent-color);
-    cursor: pointer;
-}
-
-.select-box select {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border: none;
-    color:  var(--main-text-color);
-    font-size: 1rem;
-}
-
-.form .button {
-    height: 55px;
-    width: 100%;
-    color: var(--button-color);
-    background-color: var(--button-color-nohover);
-    font-weight: 600;
-    border: none;
-    margin-top: 30px;
-    border-radius: 6px;
-    font-size: 1.3rem;
-    transition: all 0.1s ease-in-out;
-}
-
-.form .button:hover {
-    background-color: var(--backgrond-color-hover);
-}
-
-.form .multi-line>* {
-    margin-bottom: 15px;
-}
-
-.row {
-    flex-wrap: wrap;
-}
-
-#DarkMode{
-    position: absolute;
-    top: 60px;
-    transform: scale(2);
-    outline: none;
-    border: none;
-}
-
-.form input {
-    color: var(--main-text-color);
-}
-.form input:focus {
-    background-color: var(--input-color-hover);
-}
-.form input:invalid:not(input:focus) {
-    outline: 2px solid red;
-}
-@media screen and (max-width: 1000px) {
-
-    .form .check>div {
-        flex-wrap: wrap;
     }
 
-    .check-box .description {
-        font-size: 1rem;
-        font-weight: 400;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.2s ease-in-out;
+
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: var(--backgrond-color);
+    }
+
+    .container {
         width: 100%;
-        justify-content: start;
-        padding-left: 10px;
+        max-width: 1000px;
+        padding: 25px;
+        background: var(--background-color);
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .container header {
+        font-size: 1.5rem;
+        color: var(--main-text-color);
+        font-weight: 500;
+        text-align: center;
+    }
+
+    #output {
+        font-size: 1rem;
+        color: var(--main-text-color);
+        font-weight: 200;
+        text-align: center;
+        border: 2px solid var(--border-color);
+        border-radius: 6px;
+        padding: 10px 0;
+        margin-top: 10px;
+    }
+
+    .form :where(input, select) {
+        background: transparent;
+    }
+
+    .form .input-box {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .input-box label {
+        color: var(--main-text-color);
+    }
+
+    .form :where(.input-box input, .select-box) {
+        position: relative;
+        width: 100%;
+        outline: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        height: 50px;
+        border: 1px solid var(--border-color);
+        padding: 0 15px;
+    }
+
+    .form .column {
+        display: flex;
+        column-gap: 15px;
+    }
+
+    .form .column input {
+        position: relative;
+        width: 100%;
+        outline: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        height: 50px;
+        border: 1px solid var(--border-color);
+        padding: 0 15px;
+    }
+
+    .form label {
+        color: var(--main-text-color);
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .form .check-box {
+        margin-top: 20px;
+    }
+
+    .check-box h3 {
+        font-size: 1rem;
+        color: var(--main-text-color);
+        font-weight: 400;
         margin-bottom: 8px;
     }
 
-    .column{
+    .description {
+        font-size: 1rem;
+        color: var(--description-text-color);
+        width: 100%;
+        font-weight: 400;
+        justify-content: flex-end;
+        font-style: italic;
+    }
+
+    .input-box .description {
+        width: 100%;
+        padding-left: 10px;
+    }
+
+
+    .form :where(.check-option, .check, .check div) {
+        column-gap: 5px;
+        display: flex;
+        align-items: center;
         flex-wrap: wrap;
     }
-}
+
+    .form .check div label {
+        width: max-content;
+        flex-shrink: 0;
+    }
+
+    .form .check>div {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    .form .check input {
+        margin-top: 1px;
+    }
+
+    .form :where(.check input, .check label) {
+        accent-color: var(--accent-color);
+        cursor: pointer;
+    }
+
+    .select-box select {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        color: var(--main-text-color);
+        font-size: 1rem;
+    }
+
+    .form .button {
+        height: 55px;
+        width: 100%;
+        color: var(--button-color);
+        background-color: var(--button-color-nohover);
+        font-weight: 600;
+        border: none;
+        margin-top: 30px;
+        border-radius: 6px;
+        font-size: 1.3rem;
+        transition: all 0.1s ease-in-out;
+    }
+
+    .form .button:hover {
+        background-color: var(--backgrond-color-hover);
+    }
+
+    .form .multi-line>* {
+        margin-bottom: 15px;
+    }
+
+    .row {
+        flex-wrap: wrap;
+    }
+
+    #DarkMode {
+        position: absolute;
+        top: 60px;
+        transform: scale(2);
+        outline: none;
+        border: none;
+    }
+
+    .form input {
+        color: var(--main-text-color);
+    }
+
+    .form input:focus {
+        background-color: var(--input-color-hover);
+    }
+
+    .form input:invalid:not(input:focus) {
+        outline: 2px solid red;
+    }
+
+    @media screen and (max-width: 1000px) {
+
+        .form .check>div {
+            flex-wrap: wrap;
+        }
+
+        .check-box .description {
+            font-size: 1rem;
+            font-weight: 400;
+            width: 100%;
+            justify-content: start;
+            padding-left: 10px;
+            margin-bottom: 8px;
+        }
+
+        .column {
+            flex-wrap: wrap;
+        }
+    }
 </style>
