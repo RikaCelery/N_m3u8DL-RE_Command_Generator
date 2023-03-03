@@ -337,22 +337,10 @@
                     break;
                 case 'checkbox':
 
-                    if (element.checked == Boolean(element.getAttribute('default'))) {
-                        // finalArgs.push('**' + element.id)
-                        // finalArgs.push(String(element.checked))
-                    } else {
+                    if (element.checked != Boolean(element.getAttribute('default'))) {
                         finalArgs.push('--' + element.id)
                         finalArgs.push(String(element.checked))
-                    }
-                    // if (element.checked) {
-                    //     finalArgs.push('--' + element.id)
-                    //     finalArgs.push('true')
-                    // } else {
-                    //     if (element.checked != Boolean(element.getAttribute('default'))) {
-                    //         finalArgs.push('--' + element.id)
-                    //         finalArgs.push(String(element.checked))
-                    //     }
-                    // }
+                    } 
                     break;
 
                 default:
