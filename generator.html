@@ -4,49 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Command Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,700;1,400&amp;display=swap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <script>
     function changeColor() {
-        if (document.getElementById('DarkMode').checked) {
-            console.log('aaa')
-            document.documentElement.style.setProperty('--backgrond-color', 'var(--backgrond-color-light)')
-            document.documentElement.style.setProperty('--accent-color', 'var(--accent-color-light)')
-            document.documentElement.style.setProperty('--button-color-hover', 'var(--button-color-hover-light)')
-            document.documentElement.style.setProperty('--button-color-nohover', 'var(--button-color-nohover-light)')
-            document.documentElement.style.setProperty('--button-color', 'var(--button-color-light)')
-            document.documentElement.style.setProperty('--main-text-color', 'var(--main-text-color-light)')
-            document.documentElement.style.setProperty('--description-text-color',
-                'var(--description-text-color-light)')
-            document.documentElement.style.setProperty('--background-color', 'var(--background-color-light)')
-            document.documentElement.style.setProperty('--border-color', 'var(--border-color-light)')
-            document.documentElement.style.setProperty('--input-color-hover', 'var(--input-color-hover-light)')
-        } else {
-            document.documentElement.style.setProperty('--backgrond-color', 'var(--backgrond-color-dark)')
-            document.documentElement.style.setProperty('--accent-color', 'var(--accent-color-dark)')
-            document.documentElement.style.setProperty('--button-color-hover', 'var(--button-color-hover-dark)')
-            document.documentElement.style.setProperty('--button-color-nohover', 'var(--button-color-nohover-dark)')
-            document.documentElement.style.setProperty('--button-color', 'var(--button-color-dark)')
-            document.documentElement.style.setProperty('--main-text-color', 'var(--main-text-color-dark)')
-            document.documentElement.style.setProperty('--description-text-color', 'var(--description-text-color-dark)')
-            document.documentElement.style.setProperty('--background-color', 'var(--background-color-dark)')
-            document.documentElement.style.setProperty('--border-color', 'var(--border-color-dark)')
-            document.documentElement.style.setProperty('--input-color-hover', 'var(--input-color-hover-dark)')
-        }
-
-
+        document.body.classList.toggle('dark')
         return
     }
 </script>
 
-<body>
+<body class="dark">
+    <div id="DarkMode">
+        <div class="container-switch">
+            <div class="switch">
+                <div class="toggle-button">
+                    <div class="toggle"></div>
+                    <div class="moon-mask"></div>
+                    <div class="circles-wrapper">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text">
+            </div>
+        </div>
+    </div>
     <section class="container">
         <header>Generator</header>
-        <input style="width: 30px;height: 30px;" type="checkbox" name="DarkMode" id="DarkMode"
-            onclick="changeColor()"></input>
         <div id="output"></div>
         <form action="#" class="form" id="generator_body">
-
             <div class="column">
                 <div class="input-box">
                     <label for="input">Url</label>
@@ -125,6 +120,17 @@
                 </div>
             </div>
             <div class="column">
+
+                <div class="input-box">
+                    <label for="">custom-range</label>
+                    <input id="custom-range" type="text" placeholder="仅下载部分分片">
+                </div>
+                <div class="input-box">
+                    <label for="">task-start-at</label>
+                    <input id="task-start-at" type="text" placeholder="格式:<yyyyMMddHHmmss>在此时间之前不会开始执行任务">
+                </div>
+            </div>
+            <div class="column">
                 <div class="input-box">
                     <label for="">live-record-limit</label>
                     <input id="live-record-limit" type="text" placeholder="录制直播时的录制时长限制,格式: HH:mm:ss">
@@ -150,11 +156,25 @@
             </div>
             <div class="column">
                 <div class="input-box">
+                    <label for="">drop-video</label>
+                    <input id="drop-video" type="text" placeholder="通过正则表达式去除符合要求的视频流">
+                </div>
+                <div class="input-box">
+                    <label for="">drop-audio</label>
+                    <input id="drop-audio" type="text" placeholder="通过正则表达式去除符合要求的音频流">
+                </div>
+                <div class="input-box">
+                    <label for="">drop-subtitle</label>
+                    <input id="drop-subtitle" type="text" placeholder="通过正则表达式去除符合要求的字幕流">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
                     <label for="log-level">log-level</label>
                     <div class="description">设置日志级别</div>
                     <div class="select-box">
                         <select id="log-level">
-                            <option>INFO</option>
+                            <option value="">INFO</option>
                             <option>DEBUG</option>
                             <option>WARN</option>
                             <option>ERROR</option>
@@ -168,7 +188,6 @@
                     <div class="select-box">
                         <select id="custom-hls-method">
                             <option value="">AUTO</option>
-                            <option>INFO</option>
                             <option>AES_128</option>
                             <option>AES_128_ECB</option>
                             <option>CENC</option>
@@ -185,7 +204,7 @@
                     <div class="description">字幕输出类型</div>
                     <div class="select-box">
                         <select id="sub-format">
-                            <option>SRT</option>
+                            <option value="">SRT</option>
                             <option>VTT</option>
                         </select>
                     </div>
@@ -195,7 +214,7 @@
                     <div class="description">设置UI语言</div>
                     <div class="select-box">
                         <select id="ui-language">
-                            <option value="">none</option>
+                            <option value="">auto</option>
                             <option>zh-CN</option>
                             <option>zh-TW</option>
                             <option>en-US</option>
@@ -206,107 +225,113 @@
 
 
             <div class="check-box">
-                <!-- <h3>Gender</h3> -->
                 <div class="check-option ">
                     <div class="check ">
                         <div>
-                            <input type="checkbox" name="auto-select" id="auto-select" />
+                            <input type="checkbox" id="no-log" />
+                            <label for="no-log">no-log</label>
+                            <div class="description">关闭日志文件输出</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="auto-select" />
                             <label for="auto-select">auto-select</label>
                             <div class="description">自动选择所有类型的最佳轨道</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="skip-merge" id="skip-merge" />
+                            <input type="checkbox" id="skip-merge" />
                             <label for="skip-merge">skip-merge</label>
                             <div class="description">跳过合并分片</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="skip-download" id="skip-download" />
+                            <input type="checkbox" id="skip-download" />
                             <label for="skip-download">skip-download</label>
                             <div class="description">跳过下载</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="check-segments-count" id="check-segments-count" checked
-                                default="true" />
+                            <input type="checkbox" id="check-segments-count" checked default="true" />
                             <label for="check-segments-count">check-segments-count</label>
                             <div class="description">检测实际下载的分片数量和预期数量是否匹配 </div>
                         </div>
                         <div>
-                            <input type="checkbox" name="binary-merge" id="binary-merge" />
+                            <input type="checkbox" id="binary-merge" />
                             <label for="binary-merge">binary-merge</label>
                             <div class="description">二进制合并</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="del-after-done" id="del-after-done" checked default="true" />
+                            <input type="checkbox" id="del-after-done" checked default="true" />
                             <label for="del-after-done">del-after-done</label>
                             <div class="description">完成后删除临时文件 </div>
                         </div>
                         <div>
-                            <input type="checkbox" name="no-date-info" id="no-date-info" />
+                            <input type="checkbox" id="no-date-info" />
                             <label for="no-date-info">no-date-info</label>
                             <div class="description">混流时不写入日期信息</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="write-meta-json" id="write-meta-json" />
+                            <input type="checkbox" id="write-meta-json" default="true" checked />
                             <label for="write-meta-json">write-meta-json</label>
                             <div class="description">解析后的信息是否输出json文件</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="append-url-params" id="append-url-params" />
+                            <input type="checkbox" id="append-url-params" />
                             <label for="append-url-params">append-url-params</label>
                             <div class="description">将输入Url的Params添加至分片, 对某些网站很有用, 例如 kakao.com</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="concurrent-download" id="concurrent-download" />
+                            <input type="checkbox" id="concurrent-download" />
                             <label for="concurrent-download">concurrent-download</label>
                             <div class="description">并发下载已选择的音频、视频和字幕</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="sub-only" id="sub-only" />
+                            <input type="checkbox" id="sub-only" />
                             <label for="sub-only">sub-only</label>
                             <div class="description">只选取字幕轨道</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="auto-subtitle-fix" id="auto-subtitle-fix" checked
-                                default="true" />
+                            <input type="checkbox" id="auto-subtitle-fix" checked default="true" />
                             <label for="auto-subtitle-fix">auto-subtitle-fix</label>
                             <div class="description">自动修正字幕 </div>
                         </div>
                         <div>
-                            <input type="checkbox" name="use-shaka-packager" id="use-shaka-packager" />
+                            <input type="checkbox" id="use-shaka-packager" />
                             <label for="use-shaka-packager">use-shaka-packager</label>
                             <div class="description">解密时使用shaka-packager替代mp4decrypt</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="mp4-real-time-decryption" id="mp4-real-time-decryption" />
+                            <input type="checkbox" id="mp4-real-time-decryption" />
                             <label for="mp4-real-time-decryption">mp4-real-time-decryption</label>
                             <div class="description">实时解密MP4分片</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="use-system-proxy" id="use-system-proxy" checked
-                                default="true" />
+                            <input type="checkbox" id="use-system-proxy" checked default="true" />
                             <label for="use-system-proxy">use-system-proxy</label>
                             <div class="description">使用系统默认代理 </div>
                         </div>
                         <div>
-                            <input type="checkbox" name="live-perform-as-vod" id="live-perform-as-vod" />
+                            <input type="checkbox" id="live-perform-as-vod" />
                             <label for="live-perform-as-vod">live-perform-as-vod</label>
                             <div class="description">以点播方式下载直播流</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="live-real-time-merge" id="live-real-time-merge" />
+                            <input type="checkbox" id="live-real-time-merge" />
                             <label for="live-real-time-merge">live-real-time-merge</label>
                             <div class="description">录制直播时实时合并</div>
                         </div>
                         <div>
-                            <input type="checkbox" name="live-keep-segments" id="live-keep-segments" checked
-                                default="true" />
+                            <input type="checkbox" id="live-keep-segments" checked default="true" />
                             <label for="live-keep-segments">live-keep-segments</label>
                             <div class="description">录制直播并开启实时合并时依然保留分片 </div>
                         </div>
-                        <!-- <div>
-                            <input type="radio" name="" id="" checked />
-                            <label for=""></label>
-                        </div> -->
+                        <div>
+                            <input type="checkbox" id="live-pipe-mux" />
+                            <label for="live-pipe-mux">live-pipe-mux</label>
+                            <div class="description">录制直播并开启实时合并时通过管道+ffmpeg实时混流到TS文件</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="live-fix-vtt-by-audio" />
+                            <label for="live-fix-vtt-by-audio">live-fix-vtt-by-audio</label>
+                            <div class="description">通过读取音频文件的起始时间修正VTT字幕 </div>
+                        </div>
 
                     </div>
                 </div>
@@ -316,9 +341,36 @@
     </section>
 </body>
 <script>
+    const animate = gsap.timeline({ paused: true });
+    const animateBackground = new TimelineMax({ paused: true });
+    let toggle = true;
+
+    animateBackground
+        .set(".switch", { boxShadow: "0 0 10px rgba(255, 255, 255, 0.2)" })
+        .to(".text p", 0.1, { color: "#FFF" }, 0.1);
+
+    animate
+    .set(".circle", { backgroundColor: "rgba(0,0,0,0)" },0.2)
+        .to(".toggle-button", 0.1, { scale: 0.7 }, 0)
+        .set(".toggle", { backgroundColor: "#FFF" })
+        .to(".moon-mask", 0.2, { translateY: 20, translateX: -10 }, 0.3)
+        .to(".toggle-button", 0.1, { translateY: 49 }, 0.1)
+        .to(".toggle-button", 0.1, { scale: 0.9 })
+        
+    document.getElementsByClassName("switch")[0].addEventListener("click", () => {
+        if (toggle) {
+            animate.restart();
+            animateBackground.restart();
+        } else {
+            animate.reverse();
+            animateBackground.reverse();
+        }
+        toggle = !toggle;
+        changeColor()
+    });
     function generate(params) {
         let form = document.getElementById(params)
-        console.log(form)
+        // console.log(form)
         let list = form.querySelectorAll('input')
         let finalArgs = []
         for (let index = 0; index < list.length; index++) {
@@ -340,78 +392,62 @@
                     if (element.checked != Boolean(element.getAttribute('default'))) {
                         finalArgs.push('--' + element.id)
                         finalArgs.push(String(element.checked))
-                    } 
+                    }
                     break;
 
                 default:
                     break;
             }
-            console.log(element.type + ' ' + element.id + ' value:[' + element.value + '] ' + element.placeholder)
+            // console.log(element.type + ' ' + element.id + ' value:[' + element.value + '] ' + element.placeholder)
         }
         let list2 = form.querySelectorAll('select')
         for (let index = 0; index < list2.length; index++) {
             const element = list2[index];
             let opt = element.options[element.selectedIndex]
             if (opt.value === '' || opt.hidden) {
-                console.log(element.type + ' ' + element.id + ' ' + 'hidden')
+                // console.log(element.type + ' ' + element.id + ' ' + 'hidden')
             } else {
                 if (element.value.length != 0) {
                     finalArgs.push('--' + element.id + ' "' + opt.value + '"')
                 }
-                console.log(element.type + ' ' + element.id + ' ' + opt.value)
+                // console.log(element.type + ' ' + element.id + ' ' + opt.value)
             }
         }
-        document.getElementById('output').textContent = './N_m3u8DL-RE.exe ' + finalArgs.join(" ")
+        document.getElementById('output').textContent = 'N_m3u8DL-RE.exe ' + finalArgs.join(" ")
         console.log(finalArgs.join(" "))
     }
-
-    setInterval(() => generate('generator_body'), 100)
+    generate('generator_body')
+    for (const input of document.querySelectorAll('input')) {
+        input.addEventListener('input', () => generate('generator_body'))
+    }
 </script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
     :root {
-        --backgrond-color-light: rgb(130, 106, 251);
-        --backgrond-color-dark: rgb(16, 13, 29);
-        --backgrond-color: var(--backgrond-color-dark);
+        --backgrond-color: rgb(130, 106, 251);
+        --accent-color: rgb(130, 106, 251);
+        --backgrond-color-hover: var(rgb(81, 57, 202));
+        --input-color-hover: rgba(130, 106, 251, 0.501);
+        --button-color-nohover: rgb(130, 106, 251);
+        --button-color: #fff;
+        --main-text-color: rgb(0, 0, 0);
+        --description-text-color: rgb(120, 120, 120);
+        --background-color: #fff;
+        --border-color: #ddd;
+    }
 
-        --accent-color-light: rgb(130, 106, 251);
-        --accent-color-dark: rgb(130, 106, 251);
-        ;
-        --accent-color: var(--accent-color-dark);
-
-        --backgrond-color-hover-light: rgb(81, 57, 202);
-        --backgrond-color-hover-dark: rgb(80, 64, 168);
-        --backgrond-color-hover: var(--backgrond-color-hover-dark);
-
-        --input-color-hover-light: rgba(130, 106, 251, 0.501);
-        --input-color-hover-dark: rgba(81, 57, 202, 0.688);
-        --input-color-hover: var(--input-color-hover-dark);
-
-        --button-color-nohover-light: rgb(130, 106, 251);
-        --button-color-nohover-dark: rgb(52, 52, 81);
-        --button-color-nohover: var(--button-color-nohover-dark);
-
-        --button-color-light: #fff;
-        --button-color-dark: #fff;
-        --button-color: var(--button-color-light);
-
-        --main-text-color-light: rgb(0, 0, 0);
-        --main-text-color-dark: rgb(205, 205, 205);
-        --main-text-color: var(--main-text-color-dark);
-
-        --description-text-color-light: rgb(120, 120, 120);
-        --description-text-color-dark: rgb(120, 120, 120);
-        --description-text-color: var(--description-text-color-dark);
-
-        --background-color-light: #fff;
-        --background-color-dark: rgb(31, 31, 31);
-        --background-color: var(--background-color-dark);
-
-        --border-color-light: #ddd;
-        --border-color-dark: rgb(61, 61, 61);
-        --border-color: var(--border-color-dark);
-
+    .dark {
+        --backgrond-color: rgb(16, 13, 29);
+        --accent-color: rgb(130, 106, 251);
+        --backgrond-color-hover: rgb(80, 64, 168);
+        --input-color-hover: rgba(81, 57, 202, 0.688);
+        --button-color-nohover: rgb(52, 52, 81);
+        --button-color: #fff;
+        --main-text-color: rgb(205, 205, 205);
+        --description-text-color: rgb(120, 120, 120);
+        --background-color: rgb(31, 31, 31);
+        --border-color: rgb(61, 61, 61);
     }
 
     * {
@@ -424,17 +460,22 @@
     }
 
     body {
-        min-height: 100vh;
+        height: 100vh;
         display: flex;
+        overflow: hidden;
         align-items: center;
         justify-content: center;
         padding: 20px;
+        padding-top: 40px;
         background: var(--backgrond-color);
     }
 
     .container {
         width: 100%;
+        max-height: 100%;
         max-width: 1000px;
+        display: block;
+        overflow: scroll;
         padding: 25px;
         background: var(--background-color);
         border-radius: 8px;
@@ -563,6 +604,7 @@
         outline: none;
         border: none;
         color: var(--main-text-color);
+        background-color: var(--background-color);
         font-size: 1rem;
     }
 
@@ -591,13 +633,6 @@
         flex-wrap: wrap;
     }
 
-    #DarkMode {
-        position: absolute;
-        top: 60px;
-        transform: scale(2);
-        outline: none;
-        border: none;
-    }
 
     .form input {
         color: var(--main-text-color);
@@ -629,5 +664,139 @@
         .column {
             flex-wrap: wrap;
         }
+    }
+
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
+    /* ***** Colors - Start ***** */
+    /* ***** Colors - End ***** */
+    /* ***** Global Styles - Start ***** */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+
+    .container-switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ***** Global Styles - End ***** */
+    /* ***** Specific Styles - Start ***** */
+    
+
+    .switch {
+        width: 60px;
+        height: 110px;
+        padding-top: 2px;
+        background-color: #514e4b;
+        border-radius: 40px;
+        cursor: pointer;
+        outline: none;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-button {
+        transform: scale(0.8);
+        transform-origin: center center;
+    }
+
+    .toggle {
+        position: relative;
+        width: 35px;
+        height: 35px;
+        margin: 12px;
+        margin-top: 12px;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+
+    .moon-mask {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        margin: -74px 0 0 34px;
+        background-color: #514e4b;
+        border-radius: 50%;
+    }
+
+    .circle {
+        position: absolute;
+        width: 4px;
+        height: 8px;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    .circle:first-child {
+        margin: -57px 0 0 27px;
+    }
+
+    .circle:nth-child(2) {
+        margin: -9px 0 0 28px;
+    }
+
+    .circle:nth-child(3) {
+        margin: -32px 0 0 51px;
+        transform: rotate(90deg);
+    }
+
+    .circle:nth-child(4) {
+        margin: -33px 0 0 4px;
+        transform: rotate(90deg);
+    }
+
+    .circle:nth-child(5) {
+        margin: -14px 0 0 10px;
+        transform: rotate(45deg);
+    }
+
+    .circle:nth-child(6) {
+        margin: -14px 0 0 45px;
+        transform: rotate(320deg);
+    }
+
+    .circle:nth-child(7) {
+        margin: -50px 0 0 10px;
+        transform: rotate(135deg);
+    }
+
+    .circle:nth-child(8) {
+        margin: -50px 0 0 45px;
+        transform: rotate(235deg);
+    }
+
+    .text p {
+        margin-left: 5px;
+        font-size: 55px;
+        line-height: 1.1;
+        font-weight: 700;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 70px;
+    }
+
+    /* ***** Specific Styles - End ***** */
+
+    #DarkMode {
+        position: absolute;
+        display: block;
+        flex-grow: 0;
+        top: -30px;
+        left: 10px;
+        transform:scale(0.7) rotateZ(-90deg);
     }
 </style>
