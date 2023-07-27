@@ -65,3 +65,7 @@ generate('generator_body')
 for (const input of document.querySelectorAll('input')) {
     input.addEventListener('input', () => generate('generator_body'))
 }
+
+for (const input of document.querySelectorAll('select')) {
+    input.addEventListener('input', () => generate('generator_body'))
+}
