@@ -1,0 +1,273 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+header,.description,.button{
+    -webkit-user-select: none;
+    user-select: none;
+}
+:root {
+    --backgrond-color: rgb(130, 106, 251);
+    --accent-color: rgb(130, 106, 251);
+    --backgrond-color-hover: var(rgb(81, 57, 202));
+    --input-color-hover: rgba(130, 106, 251, 0.501);
+    --button-color-nohover: rgb(130, 106, 251);
+    --button-color: #fff;
+    --main-text-color: rgb(0, 0, 0);
+    --description-text-color: rgb(120, 120, 120);
+    --background-color: #fff;
+    --border-color: #ddd;
+}
+
+.dark {
+    --backgrond-color: rgb(16, 13, 29);
+    --accent-color: rgb(130, 106, 251);
+    --backgrond-color-hover: rgb(80, 64, 168);
+    --input-color-hover: rgba(81, 57, 202, 0.688);
+    --button-color-nohover: rgb(52, 52, 81);
+    --button-color: #fff;
+    --main-text-color: rgb(205, 205, 205);
+    --description-text-color: rgb(120, 120, 120);
+    --background-color: rgb(31, 31, 31);
+    --border-color: rgb(61, 61, 61);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease-in-out;
+
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    padding-top: 40px;
+    background: var(--backgrond-color);
+}
+
+.container {
+    max-height: 100%;
+    max-width: 1000px;
+    display: block;
+    overflow: scroll;
+    padding: 25px;
+    background: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container header {
+    font-size: 1.5rem;
+    color: var(--main-text-color);
+    font-weight: 500;
+    text-align: center;
+}
+
+#output {
+    font-size: 1rem;
+    color: var(--main-text-color);
+    font-weight: 200;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.form :where(input, select) {
+    background: transparent;
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-box label {
+    color: var(--main-text-color);
+}
+
+.form :where(.input-box input, .select-box) {
+    position: relative;
+    width: 100%;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    padding: 0 15px;
+}
+
+.form .column {
+    display: flex;
+    column-gap: 15px;
+}
+
+.form .column input {
+    position: relative;
+    width: 100%;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    height: 50px;
+    border: 1px solid var(--border-color);
+    padding: 0 15px;
+}
+
+.form label {
+    color: var(--main-text-color);
+    -webkit-user-select: none;
+    user-select: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.form .check-box {
+    margin-top: 20px;
+}
+
+.check-box h3 {
+    font-size: 1rem;
+    color: var(--main-text-color);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.description {
+    font-size: 1rem;
+    color: var(--description-text-color);
+    width: 100%;
+    font-weight: 400;
+    justify-content: flex-end;
+    font-style: italic;
+}
+
+.input-box .description {
+    width: 100%;
+    padding-left: 10px;
+}
+
+
+.form :where(.check-option, .check, .check div) {
+    column-gap: 5px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form .check div label {
+    width: max-content;
+    flex-shrink: 0;
+}
+
+.form .check>div {
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.form .check input {
+    margin-top: 1px;
+}
+
+.form :where(.check input, .check label) {
+    accent-color: var(--accent-color);
+    cursor: pointer;
+}
+
+.select-box select {
+    width: 100%;
+    height: 100%;
+    padding: 0px 0px;
+    outline: none;
+    border: none;
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    font-size: 1rem;
+}
+
+.form .button {
+    height: 55px;
+    width: 100%;
+    color: var(--button-color);
+    background-color: var(--button-color-nohover);
+    font-weight: 600;
+    border: none;
+    margin-top: 30px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.form .button:hover {
+    background-color: var(--backgrond-color-hover);
+}
+
+.form .multi-line>* {
+    margin-bottom: 15px;
+}
+
+.row {
+    flex-wrap: wrap;
+}
+
+
+.form input {
+    color: var(--main-text-color);
+}
+
+.form input:focus {
+    background-color: var(--input-color-hover);
+}
+
+.form input:invalid:not(input:focus) {
+    outline: 2px solid red;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .form .check>div {
+        flex-wrap: wrap;
+    }
+
+    .check-box .description {
+        font-size: 1rem;
+        font-weight: 400;
+        width: 100%;
+        justify-content: start;
+        padding-left: 10px;
+        margin-bottom: 8px;
+    }
+
+    .column {
+        flex-wrap: wrap;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+label.button {
+    z-index: 0;
+    padding: 0 8px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 40px;
+}
+
+#DarkMode {
+    position: absolute;
+    display: block;
+    flex-grow: 0;
+    top: -30px;
+    left: 10px;
+    transform: scale(0.7) rotateZ(-90deg);
+}
