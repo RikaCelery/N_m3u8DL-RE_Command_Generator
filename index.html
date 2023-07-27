@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="button-style.css">
 </head>
 <script type="module" src="generator.js"></script>
+<script type="module" src="darkmode.js"></script>
 
 <body class="dark">
     <div id="DarkMode">
@@ -37,6 +38,7 @@
         </div>
     </div>
     <section class="container">
+        <a class="link" href="/cli2re.html">CLI命令转RE</a>
         <header>Generator</header>
         <div id="output"></div>
         <form action="#" class="form" id="generator_body">
@@ -170,7 +172,8 @@
                 <div id="header" class="input-box ">
                     <div class="row">
                         <label>header</label><label class="button"
-                            onclick="insert('#header','header','为HTTP请求设置特定的请求头, 例如: -H &#x0022;Cookie: mycookie&#x0022; -H &#x0022;User-Agent: iOS&#x0022;')">+</label><label class="button" onclick="removeLast('#header')">-</label>
+                            onclick="insert('#header','header','为HTTP请求设置特定的请求头, 例如: -H &#x0022;Cookie: mycookie&#x0022; -H &#x0022;User-Agent: iOS&#x0022;')">+</label><label
+                            class="button" onclick="removeLast('#header')">-</label>
                         <input type="text" id="header"
                             placeholder="为HTTP请求设置特定的请求头, 例如: -H &#x0022;Cookie: mycookie&#x0022; -H &#x0022;User-Agent: iOS&#x0022;">
                     </div>
@@ -180,7 +183,8 @@
                 <div id="key" class="input-box ">
                     <div class="row">
                         <label>key</label><label class="button"
-                            onclick="insert('#key','key','设置解密密钥, 程序调用mp4decrpyt/shaka-packager进行解密. 格式: --key KID1:KEY1 --key KID2:KEY2')">+</label><label class="button" onclick="removeLast('#key')">-</label>
+                            onclick="insert('#key','key','设置解密密钥, 程序调用mp4decrpyt/shaka-packager进行解密. 格式: --key KID1:KEY1 --key KID2:KEY2')">+</label><label
+                            class="button" onclick="removeLast('#key')">-</label>
                         <input type="text" id="key"
                             placeholder="设置解密密钥, 程序调用mp4decrpyt/shaka-packager进行解密. 格式: --key KID1:KEY1 --key KID2:KEY2">
                     </div>

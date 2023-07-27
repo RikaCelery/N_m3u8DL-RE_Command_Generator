@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Command Generator</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,700;1,400&amp;display=swap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="button-style.css">
+</head>
+<script type="module" src="darkmode.js"></script>
+<script type="module" src="cli2re.js"></script>
+<script src="cli2re.js"></script>
+
+<body class="dark">
+    <div id="DarkMode">
+        <div class="container-switch">
+            <div class="switch">
+                <div class="toggle-button">
+                    <div class="toggle"></div>
+                    <div class="moon-mask"></div>
+                    <div class="circles-wrapper">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text">
+            </div>
+        </div>
+    </div>
+    <section class="container">
+        <a class="link" href="/">RE命令行生成</a>
+        <header>CLI -> RE</header>
+        <div id="output">转换后的RE命令行将会显示在这里</div>
+        <div class="form" action="#">
+            <div class="input-box">
+                <label for="input">CLI</label>
+                <textarea id="input" rows="20" placeholder="请输入完整的CLI命令" required></textarea>
+            </div>
+        </div>
+        <div id="info-box" class="info-box">
+            <!-- <div class="info">
+                <div class="arg-name">
+                    --headers
+                </div>
+                <div class="arg-option">
+                    "Cookie: None"
+                </div>
+            </div>
+
+            <div class="info error">
+                <div class="arg-name">
+                    --headers
+                </div>
+                <div class="arg-option">
+                    "Cookie: None"
+                </div>
+            </div> -->
+        </div>
+    </section>
+</body>
+<script>
+    document.getElementById('input').addEventListener("input", function (e) {
+        document.getElementById('output').innerText = convert(e.target.value)
+    })
+</script>
+<style>
+    textarea {
+        word-wrap: break-word;
+        color: var(--main-text-color);
+        background: none;
+    }
+    .info-box{
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        margin-top: 3px;
+    }
+    .info {
+        display: flex;
+        flex-direction: row;
+        column-gap: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.192);
+        /* border: solid 1px var(--border-color); */
+        background-color: var(--background-color);
+        color: var(--main-text-color);
+    }
+    .info .arg-name{
+        font-weight: 500;
+    }
+    .info .arg-option{
+        font-weight: 300;
+    }
+    .info.ok{
+        background-color: var(--info-ok-color);
+    }
+    .info.error{
+        background-color: var(--info-error-color);
+    }
+    .info.drop{
+        text-decoration: line-through;
+        color: var(--info-drop-color);
+    }
+    .info.unknown{
+        color: red;
+    }
+</style>

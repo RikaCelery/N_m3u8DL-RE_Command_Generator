@@ -10,6 +10,9 @@ header,.description,.button{
     --backgrond-color-hover: var(rgb(81, 57, 202));
     --input-color-hover: rgba(130, 106, 251, 0.501);
     --button-color-nohover: rgb(130, 106, 251);
+    --info-ok-color: #a3ecae;
+    --info-error-color: #eca3a3;
+    --info-drop-color: #888;
     --button-color: #fff;
     --main-text-color: rgb(0, 0, 0);
     --description-text-color: rgb(120, 120, 120);
@@ -23,6 +26,8 @@ header,.description,.button{
     --backgrond-color-hover: rgb(80, 64, 168);
     --input-color-hover: rgba(81, 57, 202, 0.688);
     --button-color-nohover: rgb(52, 52, 81);
+    --info-ok-color: #273929;
+    --info-error-color: #411111;
     --button-color: #fff;
     --main-text-color: rgb(205, 205, 205);
     --description-text-color: rgb(120, 120, 120);
@@ -49,10 +54,14 @@ body {
     padding-top: 40px;
     background: var(--backgrond-color);
 }
-
+a{
+    position: absolute;
+    color: var(--main-text-color);
+}
 .container {
     max-height: 100%;
     max-width: 1000px;
+    width: 100%;
     display: block;
     overflow: scroll;
     padding: 25px;
@@ -92,7 +101,7 @@ body {
     color: var(--main-text-color);
 }
 
-.form :where(.input-box input, .select-box) {
+.form :where(.input-box input, .input-box textarea,.select-box) {
     position: relative;
     width: 100%;
     outline: none;
@@ -102,13 +111,16 @@ body {
     border: 1px solid var(--border-color);
     padding: 0 15px;
 }
-
+.form textarea{
+    height: 150px;
+    resize: none;
+}
 .form .column {
     display: flex;
     column-gap: 15px;
 }
 
-.form .column input {
+.form .column input ,.form .column textarea{
     position: relative;
     width: 100%;
     outline: none;
@@ -174,7 +186,7 @@ body {
     margin-top: 1px;
 }
 
-.form :where(.check input, .check label) {
+.form :where(.check input, .check textarea,.check label) {
     accent-color: var(--accent-color);
     cursor: pointer;
 }
@@ -218,11 +230,11 @@ body {
 }
 
 
-.form input {
+.form input ,.form textarea{
     color: var(--main-text-color);
 }
 
-.form input:focus {
+.form input:focus ,.form textarea:focus {
     background-color: var(--input-color-hover);
 }
 
