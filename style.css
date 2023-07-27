@@ -121,6 +121,7 @@ body {
 
 .form label {
     color: var(--main-text-color);
+    -webkit-user-select: none;
     user-select: none;
     font-size: 1.2rem;
     font-weight: 500;
