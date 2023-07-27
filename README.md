@@ -6,8 +6,7 @@
 
 ## 使用
 
-+ 拉取仓库或者单独下载[generator.html](https://github.com/RikaCelery/N_m3u8DL-RE_Command_Generator/blob/main/generator.html)
-+ 打开 generator.html
+**https://rikacelery.github.io/N_m3u8DL-RE_Command_Generator/**
 
 支持大部分参数
 
