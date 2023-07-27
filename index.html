@@ -13,6 +13,23 @@
 </head>
 <script type="module" src="generator.js"></script>
 <script type="module" src="darkmode.js"></script>
+<script>
+    function insert(pos, id, placeholder) {
+        let input = document.createElement('input')
+        input.type = 'text'
+        input.id = id
+        input.placeholder = placeholder
+        input.oninput = () => { generate('generator_body') }
+        document.querySelector(pos).appendChild(input)
+    }
+    function removeLast(pos) {
+        console.log(document.querySelector(pos).lastChild.tagName);
+        if (document.querySelector(pos).lastChild.tagName != 'INPUT') {
+            return
+        }
+        document.querySelector(pos).removeChild(document.querySelector(pos).lastChild)
+    }
+</script>
 
 <body class="dark">
     <div id="DarkMode">

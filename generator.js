@@ -1,19 +1,4 @@
 
-function insert(pos, id, placeholder) {
-    let input = document.createElement('input')
-    input.type = 'text'
-    input.id = id
-    input.placeholder = placeholder
-    input.oninput = () => { generate('generator_body') }
-    document.querySelector(pos).appendChild(input)
-}
-function removeLast(pos) {
-    console.log(document.querySelector(pos).lastChild.tagName);
-    if (document.querySelector(pos).lastChild.tagName != 'INPUT') {
-        return
-    }
-    document.querySelector(pos).removeChild(document.querySelector(pos).lastChild)
-}
 function generate(params) {
     let form = document.getElementById(params)
     // console.log(form)
