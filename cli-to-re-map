@@ -1,0 +1,33 @@
+workDir                      -> save-dir
+saveName                     -> save-name
+baseUrl                      -> base-url
+headers(key:value|key:value) -> header
+maxThreads                   -> <unusable>
+minThreads                   -> thread-count
+retryCount                   -> download-retry-count
+timeOut                      -> <unusable>
+muxSetJson                   -> ? maybe mux-import
+useKeyFile                   -> custom-hls-key
+useKeyBase64                 -> custom-hls-key
+useKeyIV                     -> custom-hls-iv
+downloadRange                -> custom-range <need-convert>
+liveRecDur                   -> live-record-limit
+stopSpeed                    -> <unusable>
+maxSpeed                     -> <unusable>
+proxyAddress                 -> custom-proxy
+enableDelAfterDone           -> del-after-done
+enableMuxFastStart           -> <unusable>
+enableBinaryMerge            -> binary-merge
+enableParseOnly              -> skip-download + skip-merge
+enableAudioOnly              -> drop-audio .* + drop-subtitle .*
+disableDateInfo              -> no-date-info
+disableIntegrityCheck        -> check-segments-count False
+noMerge                      -> skip-merge
+noProxy                      -> use-system-proxy False
+registerUrlProtocol          -> <unusable>
+unregisterUrlProtocol        -> <unusable>
+enableChaCha20               -> ?
+chaCha20KeyBase64            -> ?
+chaCha20NonceBase64          -> ?
+help                         -> help
+version                      -> version
