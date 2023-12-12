@@ -43,7 +43,7 @@ function generate(params) {
             // console.log(element.type + ' ' + element.id + ' ' + opt.value)
         }
     }
-    document.getElementById('output').textContent = 'N_m3u8DL-RE.exe ' + finalArgs.join(" ")
+    document.getElementById('output').textContent = 'N_m3u8DL-RE ' + finalArgs.join(" ")
     console.log(finalArgs.join(" "))
 }
 generate('generator_body')
