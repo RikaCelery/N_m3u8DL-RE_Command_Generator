@@ -99,21 +99,33 @@
             </div>
             <div class="column">
                 <div class="input-box">
+                    <label>max-speed</label>
+                    <input id="max-speed" type="text" placeholder="设置限速，单位支持 Mbps 或 Kbps，如：15M 100K" defalut="">
+                </div>
+                <div class="input-box">
                     <label>ffmpeg-binary-path</label>
                     <input id="ffmpeg-binary-path" type="text" placeholder="ffmpeg可执行程序全路径, 例如 C:\Tools\ffmpeg.exe">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label>live-take-count</label>
+                    <input id="live-take-count" type="text" placeholder="手动设置录制直播时首次获取分片的数量 [default: 16]">
                 </div>
                 <div class="input-box">
                     <label>urlprocessor-args</label>
                     <input id="urlprocessor-args" type="text" placeholder="此字符串将直接传递给URL Processor">
                 </div>
             </div>
-            <div class="input-box">
-                <label>key-text-file</label>
-                <input id="key-text-file" type="text" placeholder="设置密钥文件,程序将从文件中按KID搜寻KEY以解密.(不建议使用特大文件)">
-            </div>
-            <div class="input-box">
-                <label>decryption-binary-path</label>
-                <input id="decryption-binary-path" type="text" placeholder=" MP4解密所用工具的全路径, 例如 C:\Tools\mp4decrypt.exe">
+            <div class="column">
+                <div class="input-box">
+                    <label>key-text-file</label>
+                    <input id="key-text-file" type="text" placeholder="设置密钥文件,程序将从文件中按KID搜寻KEY以解密.(不建议使用特大文件)">
+                </div>
+                <div class="input-box">
+                    <label>decryption-binary-path</label>
+                    <input id="decryption-binary-path" type="text" placeholder=" MP4解密所用工具的全路径, 例如 C:\Tools\mp4decrypt.exe">
+                </div>
             </div>
 
             <div class="column">
@@ -155,6 +167,12 @@
                 <div class="input-box">
                     <label>live-wait-time</label>
                     <input id="live-wait-time" type="text" placeholder="手动设置直播列表刷新间隔, 单位为秒">
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-box">
+                    <label>ad-keyword</label>
+                    <input id="ad-keyword" type="text" placeholder="设置广告分片的URL关键字(正则表达式)">
                 </div>
             </div>
             <div class="column">
@@ -295,6 +313,11 @@
                             <input type="checkbox" id="binary-merge" />
                             <label for="binary-merge">binary-merge</label>
                             <div class="description">二进制合并</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="use-ffmpeg-concat-demuxer" />
+                            <label for="use-ffmpeg-concat-demuxer">use-ffmpeg-concat-demuxer</label>
+                            <div class="description">使用 ffmpeg 合并时，使用 concat 分离器而非 concat 协议 [default: False]</div>
                         </div>
                         <div>
                             <input type="checkbox" id="del-after-done" checked default="true" />
