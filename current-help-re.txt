@@ -1,4 +1,4 @@
-Description:
+﻿Description:
   N_m3u8DL-RE (Beta version) 20231113
 
 Usage:
